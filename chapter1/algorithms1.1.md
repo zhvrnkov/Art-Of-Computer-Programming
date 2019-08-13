@@ -12,7 +12,7 @@ Process:
 2. [Is it zero?] If r = 0, n is the answer
 3. [Reduce.] Set m <- n, n <- r, goto 1.
 
-[c-implementation](./euclid-alogithm.c)
+[c-implementation](./euclid-algorithm.c)
 
 > "<-" - replacement operation (assigment). m <- n means replace value of m by value of n. In general "variable <- formula". "m <-> n" means Exchange m and n and is equivelent to "t <- m, m <- n, n <- t"
 

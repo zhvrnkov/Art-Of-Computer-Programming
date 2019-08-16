@@ -118,3 +118,36 @@ The purpose is to prove that algorithm works correctly for all m and n. First pr
 ```
 a'm + b'n = c, am + bn = d
 ```
+
+### EXERCISES
+1. In case of `1 + 3 + ... + (2n - 1) = n^2`.
+```
+P.0 = 1 = 0^2 - true
+```
+And then continue as follow - you can add `(2n + 1)` to both sides or just calculate the boolean status of this expression for `n=1,n=2...`. I don't think that this matters. We could start from `n=3`, the only condition is that `n` must be in input-range of `P`.
+
+2. First, in equation for `a^(n+1)` (which is `a^)(n-1) + 1)`). Which `a^n` is equal to middle part of this equation? I checked this and it isn't - the first missplacing.
+Also, is in this example we use the same algorithm for prooving `P.0` and `P.1`. What is the algorithm for `P.0`? Just get the exponent and compare with `0`. What we do for `P.1`. Well there is a mess and I assume that it isn't just getting exponent and compare with `0` But should they be equal?
+
+What is written in that equation? `a^n`, but it seems like that we first make it equal to `1` and then derive the sense of algorithm `a^n`.
+
+For proove `P.n = 1 + 3 + ... + (2n - 1) = n^2` we work with that `P.n`. We calculate the `P.n` for `n=0` and etc. We add `(2n+1)` for both sides of `P.n` and made sure that sides are equal. In this example (if a = const) we got `P.n = a * a * a * ... - n times` and we should proove it but not some fancy equation that we construct to be equal the desired result.
+
+3. If proof the man found that for `n = 1` the `3/2 - 1/n = 1/(1 * 2)` but that isn't true. The left hand side here isn't for `n = 1` is is for `n = 2`. In all, `1` isn't the member of `P.n` function - the input starts from `2`.
+
+I made such conclusion becase:
+
+First. if we pass `n = 2` from `1/((n-1) * n)` we get `1/(1 * 2)` and hence we should write `1/2 + 1/2` but it isn't our sequence.
+
+Second. if from `1/((n-1) * n)` we should get `1/2` for `n = 1` that it fails and I assume that `1` isn't in input-set of that algorithm.
+
+4. Follow the `F.n =< f^(n-1)` proof or look at my notebook.
+
+5. `P.n` is an algorithm that output boolean:
+`true` if `n` can be represented as a product of one or more prime numbers and `false` if cannot. `n` must be > 1. 
+```
+Base: P.2 = true
+Assume: P.n is holds for n =< N
+If N is prime then it is true
+Else n = a * b, where a,b < N
+```

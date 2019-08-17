@@ -118,13 +118,44 @@ The purpose is to prove that algorithm works correctly for all m and n. First pr
 ```
 a'm + b'n = c, am + bn = d
 ```
+equation always hold whenever step 2 is executed. The way to prove these equalities is directly observing that they are true after first execution of step 2, and that step 4 does not change their validity.
+
+> So we sure, that after step 2 these equations are always true? No, we don't know that initialy, but we can observe it.
+
+Validation of algorithm:
+
+If `m` is multiple of `n` - the algorithm works becasue after 3rd step it just output n. This case always occur when `n = 1`. The only case remining is `n > 1` and `m` isn't multiple of `n`. In such a case we fall to 4th step and set `c <- d`, `d <- r` after  the first execution. Since `r < n` (because r is remainder after division by n) we *may assume by induction` that the final d is `gcd` (great common divisor) of `n` and `r`. In Section 1.1 we show, that the pairs `{m,n}` and `{n,r}` share common divisors, and have same gcd. And if `d` is the gcd of `n` and `r` then it also gcd of `m` and `n`.
+
+If we slightly change that method of proving, then we can envision a genral method applicable to proving the validity of *any* algorithm.
+
+The idea is `assertions`, that was placed across the steps of algorithm. In other words take a flow chart for some algorithm and label each step-step transitional phase. In that labels place assertions about current state of algorithm.
+
+For example, assertiones of E.Algorithm:
+Start - S1: `m > 0, n > 0` - that input is valid
+S1 - S2: `c = m > 0, d = n > 0, a = b' = 0, a' = b = 1` - that initial state is good
+S2 - S3: `qd + r = c = a'm + b'n, am + bn = d, 0 =< r < d, gcd(c, d) = gcd(m, n)`
+S3 - STOP: `am + bn = d = gcd(m ,n)`
+S3 - S4: same as S2 - S3
+S4 - S2: `am + bn = d, a'm + b'n = c, d > 0, gcd(c, d) = gcd(m, n)`
+
+> This assertions isn't prove that algorithm is finite. But it proves that if it terminated, then it will output right answer
+
+The general method consists of proving, for each box in the flow chart, that
+> if any one of the assertions on the arrows leading into the box is true before the operation in that box is performed, then all of the assertions on the arrows leading away from the box are true after the operation
+
+Thus we must first perform assertion for that box, and then execute it. The upper quote mean, that our assertions, if they pass, need to guarantee that associated block of execution will output expected data. And then, if it is output expected data, then all other boxes should also output expected data and so on. The last conclusion (that if any assertion is true, then all other also be true) is made by assuming, that algorithm is right and all steps are perfect. But it is just assumption. For actual proving this we should place assertions before each algorithm step (block).
+
+The proving, that all assertions are true is called *induction leap* in that context. Proving that *induction leap* is valid for some start value - is base proof, on which other  *induction leaps* will recline.
+
+Also placing assertions across the algorithm helps to understand the sense of it.
+> It mirrors the way we understand an algorithm.
+
+> Matheatical induction isn't always have such name. The first related thing to it was called "method of infinite descent". The same notion appear in writings of Blais Pscal (1653). The first appearence of "mathematical induction" were in A. De Morgan writings (19 century).
+
+The father of TDD is R.W.Floyd - he formulate the algorithm-proving in terms of assertnions and induction.
 
 ### EXERCISES
-1. In case of `1 + 3 + ... + (2n - 1) = n^2`.
-```
-P.0 = 1 = 0^2 - true
-```
-And then continue as follow - you can add `(2n + 1)` to both sides or just calculate the boolean status of this expression for `n=1,n=2...`. I don't think that this matters. We could start from `n=3`, the only condition is that `n` must be in input-range of `P`.
+1. As usual, prove `P.0` and then prove `P.n+1` based on previous result (`P.n`). If you prove this for `P.0` and have prove for `P.n+1` then you can prove it for `n=1,2,3...`
 
 2. First, in equation for `a^(n+1)` (which is `a^)(n-1) + 1)`). Which `a^n` is equal to middle part of this equation? I checked this and it isn't - the first missplacing.
 Also, is in this example we use the same algorithm for prooving `P.0` and `P.1`. What is the algorithm for `P.0`? Just get the exponent and compare with `0`. What we do for `P.1`. Well there is a mess and I assume that it isn't just getting exponent and compare with `0` But should they be equal?

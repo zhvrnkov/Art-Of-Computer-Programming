@@ -182,3 +182,22 @@ Assume: P.n is holds for n =< N
 If N is prime then it is true
 Else n = a * b, where a,b < N
 ```
+
+6. TODO
+
+7.
+**Formula**:
+```
+P.0 = 0
+P.n = n^2 - P(n-1) = P(n - 1) + n
+```
+**Proof**:
+```
+P(n + 1) = (n + 1)^2 - P.n
+      	 = (n + 1)^2 - (n^2 - P(n - 1))
+	 = n^2 + 2n + 1 - n^2 + P(n - 1)
+	 = 2n + 1 + P(n - 1)
+	 = (n + 1) + (P(n - 1) + n)
+	 = P.n + (n + 1)
+```
+The only problem is that I *don't understand what does it mean*.

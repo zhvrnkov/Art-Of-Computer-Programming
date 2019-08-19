@@ -201,3 +201,20 @@ P(n + 1) = (n + 1)^2 - P.n
 	 = P.n + (n + 1)
 ```
 The only problem is that I *don't understand what does it mean*.
+
+**Explanation of 7th exercise**:
+1. We have a seq. `(n^2 - ((n-1)^2 - ((n-2)^2 - ... - 1^2)))` which can be formulated as `P.n = n^2 - P(n-1)` where `P.0 = 0`
+2. We want to prove that `[P.n = n^2 - P(n-1)] = P(n - 1) + n`. We're going to prove that by induciton
+3. For that we need to prove the **Base** case and implement **Induction Step**
+   + Base: `n^2 - P(n - 1) = P(n - 1) + n` for n = 1
+   + Induction step:
+   Assume that `P.n = P(n - 1) + n` for `n = k`. If so, then `P(n + 1) = (P(n - 1) + n) + (n + 1)` is also true, here is why:
+```
+P(n + 1) = (n + 1)^2 - (n^2 - P(n - 1))
+P(n + 1) = (P(n - 1) + n) + (n + 1)
+(n + 1)^2 - (n^2 - P(n - 1)) = (P(n - 1) + n) + (n + 1)
+n^2 + 2n + 1 - n^2 + P(n - 1) =
+(n + 1) + P(n) = P(n) + (n + 1)
+```
+
+> Base case and P(n) => P(n + 1)

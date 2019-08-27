@@ -218,3 +218,75 @@ n^2 + 2n + 1 - n^2 + P(n - 1) =
 ```
 
 > Base case and P(n) => P(n + 1)
+
+# 1.2.3 Sums and Products
+`a1, a2, a3, a4 ...` - sequence of numbers
+`a1 + a2 + a3 + a4 + ...` - sum of sequence
+
+This sum can be writtent more compactly using either of the following sequences:
+```
+n      
+∑ aj or ∑ aj
+j=a     1 =< j =< n
+```
+
+If `n = 0` then `∑ = 0`.
+
+In general, if `R(j)` is any relation involving `j`, the symbol (2)
+```
+∑ aj
+R(j)
+```
+means the **sum of all `aj`, where `j` is an integer satisying the condition. If no such integers, then sum is equal zero.
+
+`j` - is just index
+
+> The use of a sigma and index variables to indicate summation with definite limits was introduced by J.Fourier in 1820
+
+In most cases of and when working with *finite* sums we will use the (2) notation. The sum is *finite* only if:
+1. finite numbers of value `j` satisfy `R(j)`
+2. `a[j] != 0`
+
+If the *infinite* sum, such:
+```
+∞
+∑   = ∑ a[j] = a[1] + a[2] + a[3] + ...
+j=1   j>=1
+```
+
+> I will treat sums not as in mathmatic via sigmas, but with pseudocode
+
+is required with infinetly many nonzero terms, the techniques of calculus must be employed.
+The preciese meaning of (2) then is:
+```
+sum(of: a, whereIndex: R(j)) =
+lim(n -> [0..], sum(of: a, whereIndex: R(j) && (0 =< j =< n))) +
+lim(n -> [0..], sum(of: a, whereIndex: R(j) && (0 =< j =< n)))
+```
+
+Is it can be understood as *sum of two infinities is equal to one infinity*:
+```
+[0..] + [0..] = [0..]
+```
+
+> (2) provided that both limits exist. If either limit failt to exist, the infinite sum is **divergent**; it does not exist. Otherwise it is **convergent**
+
+The sum require that all conditions, placed under *sigma*, are holds.
+
+### Four simple algebraic operations on sums
+
+#### a. The distributive law
+for products of sums:
+```
+sum(of:	a[i], whereIndex: R(i)) * sum(of: b[j], whereIndex: S(j)) =
+sum(of: sum(of: a[i] * b[j], whereIndex: R(i) && S(j)))
+```
+
+In other words:
+```
+(a[1] + a[2] + a[3] + ...) *
+(b[1] + b[2] + b[3] + ...) =
+(a[1]b[1] + a[1]b[2] + a[1]b[3] + ...) +
+(a[2]b[1] + ...) + ...
+```
+

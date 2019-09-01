@@ -290,3 +290,62 @@ In other words:
 (a[2]b[1] + ...) + ...
 ```
 
+
+#### b. Change of variable
+
+**TODO**: should be studied deeply and well understanded
+
+#### c. Interchanging order of summation
+``` (1)
+while isInRange1 . next $ i
+	while isInRange2 . next $ j
+		add a[i, j]
+```
+Is equivelent to:
+``` (2)
+while isInRange2 . next $ j
+	while isInRange1 . next $ i
+		add a[i, j]
+```
+
+**TODO**: nice exercise would be to prove that substracting the sets `all i and j where first loop is for i` and `all i and j where first loop is for j` will produce `empty set`.
+
+Changing the order of summation is very useful in cases, where we know how to simplify one some and don't for another.
+
+If we know the `while isInRange1 j.next; add a[i, j]` in (1), then we can tranform it to (2) and simplify the known part.
+
+Lets exam this in more general way for:
+`isInRange2 :: Int -> Bool` depends on `i` and `j`. Therefore `isInRange2 :: Int -> Bool` is equivelent to `isInRange2 :: Int -> Int -> Bool`. Furthermore we can interchange the order from:
+```
+while isInRange1 . next $ i
+	while inInRange2 i (next j)
+		add a[i, j]
+```
+to:
+```
+while isInRange2' . next $ j
+	while isInRange1' (next i) j
+		add a[i, j]
+```
+where:
++ `isInRange2' :: Int - Bool` - there is an `Int` `i` such that both `isInRange1 :: Int -> Bool` and `isInRange2 :: Int -> Int -> Bool` are `True`
++ `isInRange1' :: Int -> Int -> Bool` -> both `isInRange1` and `isInRange2 :: Int -> Int -> Bool` are `True`
+
+Please follow the code-examples: [code](./interchanging-the-order-of-summation.hs)
+
+#### d. Manipulating the domain
+`R.i` and `S.j` - arbitrary relations
+
+> Doesn' clear understand on 'arbitrary' means here. This conditions are optional? One can be true and another false?
+
+```
+first = while R . next $ j; add a[j]
+second = while S . next $ j; add a[j]
+sum = first + second
+
+first' = while (R . next $ j) || (S . next $ j); add a[j]
+second' = while (R. next $ j) && (S . next $ j); add a[j]
+sum' = first' + second'
+
+equality = sum' == sum -- True
+```

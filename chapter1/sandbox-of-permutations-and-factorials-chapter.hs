@@ -1,5 +1,4 @@
 import qualified Data.Set as Set
-import Data.Fixed
 
 type Prime = Integer
 
@@ -15,18 +14,6 @@ term' num
   | num < 1 = 0
   | num == 1 = 1
   | otherwise = num + term' (num - 1)
-
-data Permutation = Permutation { n :: [Int], k :: Int }
-
-count :: Permutation -> Int
-count (Permutation objects k)
-  | k == 0 = 0
-  | k == 1 = n
-  | otherwise = (* n) . count $ Permutation (tail objects) (k - 1)
-  where n = length objects
-
---act :: Permutation -> [[Int]]
---act perm =
 
 allCombinations :: Set.Set a -> [[a]]
 allCombinations set =
@@ -82,3 +69,10 @@ _mu n p base
     n' = (fromIntegral n) :: Double
     p' = (fromIntegral p) :: Double
     floored = floor (n' / p')
+
+fac_estimation :: (Fractional a, Floating a) => a -> a
+fac_estimation n = ((*) . sqrt . (* 2) . (* pi) $ n) $ ((**n) . (/e) $ n)
+  where e = Prelude.exp 1
+
+fac_better_estimation :: (Fractional a, Floating a) => a -> a
+fac_better_estimation n = (* fac_estimation n) $ (+ 1) . (1/) $ 12 * n

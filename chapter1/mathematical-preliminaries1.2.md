@@ -219,6 +219,50 @@ n^2 + 2n + 1 - n^2 + P(n - 1) =
 
 > Base case and P(n) => P(n + 1)
 
+# 1.2.2 Numbers, Power and Logarithms
+**Integers** - whole numbers (negative, zero or positive)
+
+**Rational** - ratio of two integers, `p/q` where `q` is positive
+
+**Real** - quantity `x` that has a *deciamal expansion*
+`x = n + 0.(d1)(d2)(d3)...`
+where `n` is an integer, each `di` is a digit in `0..9`
+
+Also notice, that Real number cannot ends with sequence of infinitely many `9s`. In other words:
+```
+n + d1/10 + d2/100 + ... + dk/10^k =< x < n + d1/10 + ... + dk / 10^k + 1/10^k
+```
+> Here is my thoughts:
+> this exprassion is interesting, because 0.(9) =< 1.0 - 0.(9) seems less, but if we get the `lim` then it's equal. But! Author saids that `n < n + 1/10^k`, which means that n cannot have 9 in period ((9))
+
+**Complex** - quantity `z` of the form `z = x + iy`, where `x, y` - real numbers, i - quantity, that satisfies the equation `i^2 = -1`. `x, y` - real part, `i` - imaginary part of complex number
+`|z| = (x^2 + y^2)^(1/2)`
+
+> Throught this section, b - positive real number.
+
+```
+b^0 = 1
+b^n = b^(n - 1)b if n > 0,
+b^n = b^(n + 1)/b if n < 0
+```
+
+### Laws of exponent: prove by induction
+`b^(x + y) = (b^x)(b^y)`,
+`(b^x)^y = b^(xy)`
+whenver `x,y` - integers
+
+**Base**: `b^0 = (b^0)(b^0) = 1`
+**Step**:
+Assume `n = x + y` and `b^n = (b^x)(b^y) = P(n)`
+when `P(n) = b^(n - 1)b`.
+
+Then `P(n + 1) = b^n * b = b^x * b^y * b`
+```
+n + 1 = x + (y + 1)
+b^n * b = b^x * b^y * b = b^(n + 1)
+```
+
+
 # 1.2.3 Sums and Products
 `a1, a2, a3, a4 ...` - sequence of numbers
 `a1 + a2 + a3 + a4 + ...` - sum of sequence

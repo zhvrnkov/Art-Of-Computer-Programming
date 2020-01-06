@@ -247,21 +247,44 @@ b^n = b^(n + 1)/b if n < 0
 ```
 
 ### Laws of exponent: prove by induction
-`b^(x + y) = (b^x)(b^y)`,
-`(b^x)^y = b^(xy)`
-whenver `x,y` - integers
 
-**Base**: `b^0 = (b^0)(b^0) = 1`
+1. `a^(x + y) = a^x * a^y`
+
+**Base**:
+```
+y = 0
+a^x = a^x * 1
+```
+
 **Step**:
-Assume `n = x + y` and `b^n = (b^x)(b^y) = P(n)`
-when `P(n) = b^(n - 1)b`.
-
-Then `P(n + 1) = b^n * b = b^x * b^y * b`
+Assume true for `y = k`. `a^(x + k) = a^x * a^k`
+Solve for: `y = k + 1`
 ```
-n + 1 = x + (y + 1)
-b^n * b = b^x * b^y * b = b^(n + 1)
+a^(x + (k + 1)) = a^x * a^(k + 1)
+a^(x + k + 1) = a^x * a^(k + 1)
+// since assumption:
+a^(x + k) * a = a^x * a^k * a
+a^(x + k) = a^x * a^k --> go to assumption
 ```
 
+2. `(a^m)^n = a^(mn)`
+
+**Base**:
+```
+n = 1
+(a^m)^1 = a^(m1)
+a^m     = a^m
+```
+
+**Step**:
+Assume true for `n = k`. `(a^m)^k = a^(mk)`
+Solve for: `n = k + 1`
+```
+(a^m)^(k + 1) = a^m(k + 1)
+(a^m)^(k + 1) = a^(mk + m)
+(a^m)^k * (a^m)^1 = a^(mk) * a^m
+(a^m)^k = a^(mk) --> go to assumption
+```
 
 # 1.2.3 Sums and Products
 `a1, a2, a3, a4 ...` - sequence of numbers

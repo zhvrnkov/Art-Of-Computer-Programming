@@ -416,3 +416,138 @@ sum' = first' + second'
 
 equality = sum' == sum -- True
 ```
+
+# 1.2.4 Integer Functions and Elementary Number Theory
+If x is any real number, we write
+```
+floor x - the greatest integer less than or equal to x
+ceiling x - the least integer greater than or equal to x
+```
+
+You can easily verify that:
+```
+(floor $ sqrt 2)   == 1
+(ceiling $ sqrt 2) == 2
+floor (1 / 2)      == 0
+ceiling (- 1 / 2)  == 0
+floor (- 1 / 2)    == -1
+```
+
+Also:
+```
+ceiling x == floor x // only of x is an integer
+ceiling x == 1 + floor x  // only if x is not an integer
+floor -x  == - (ceiling x)
+x - 1 < (floor x) =< x =< (ceiling x) < x + 1
+```
+
+### Mod
+If x and y are any real numbers, we define the following binary operation:
+```
+x mod y = x - y * (floor $ x / y) // if y /= 0
+x mod 0 = x
+```
+
+> (floor $ x / y) - how many y's are in x
+> y * (how many y's are in x) // is like change unit of number field from 1 to y and try to represent x in integers
+> y * (how many y's are in x) // best approximation to x by y or sum of ys
+
+Also if `y \= 0` then: `0 =< x/y - (floor $ x/y) = (x mod y)/y < 1`
+if `y < 0` then `0 >= x mod y > y`
+and if `y > 0` then `0 =< x mod y < y`
+
+> (x - (x mod y)) is an integral multiple of y
+> (x - (x mod y)) = y * (floor $ x/y)
+
+`x mod y` - *remainder* when x is divided by y
+
+`floor $ x/y` - the *quotient*
+
+> The notation `x\y`, read "y divides x", means that y is a positive integer and `x mod y = 0`
+
+### Congruence 
+`x ≡ y (modulo z)` means that `x mod z = y mod z`
+
+Also if exapnd this:
+```
+x mod z = y mod z
+x - z * (floor x/z) = y - z * (floor y/z)
+x - y = z * (floor x/z) - z * (floor y/z)
+```
+
+it means that `x - y` is an integral multiple of z
+
+### Properties of congruence
+> x and y are realitively prime if gcd x y == 1
+
+> Also notice that if a mod m == b mod m, then
+> a = N * m + X
+> b = W * m + X
+> where N and W are Integers
+
+1. Law A \
+if a ≡ b and x ≡ y, then a (+/-) x ≡ b (+/-) y and ax ≡ by
+
+##### Law A (+/-) proof
+```
+a = Xa * m + N
+x = Xx * m + W
+b = Xb * m + N
+y = Xy * m + W
+
+==>
+
+a (+/-) x ≡ b (+/-) y <=>
+((Xa + Xx) * m + N + W) mod m =
+((Xb + Xy) * m + N + W) mod m
+
+// it is true if (N * m + X) mod m == X mod mw
+// since those operands are different only in (Xa + Xx) and (Xb + Xy)
+// which are Integers and can be replaced by N1 and N2
+
+// proof that ((Xa + Xx) * m + N + W) mod m
+
+A ≡ B (mod C) => (xC + N) mod C = (yC + N) mod C
+// for y = 0 it is (xC + N) mod = N mod C
+// done
+```
+
+##### Law A multiplication proof
+```
+ax mod m <=> ([XaXx * m^2 + XamW + XxmN] + NW)
+// the "[]" part if defenetly N * m ==>
+<=> NW mod m
+// and ay mod m can be simplified to NW mod m too
+// done
+```
+
+2. Law B \
+if ax ≡ by (mod m) and a ≡ b, and if (gcd a m) == 1, then x ≡ y (mod m)
+
+##### Law B proof
+```
+a = Am + N
+b = Bm + N
+x = Xx + W
+y = Yy + V
+
+ax mod m =
+(AmXx + WAm + NXx + NW) mod m = 
+// we can remove multiples of m 
+(NXx + NW) mod m =
+N(Xx + W) mod m =
+// since x = Xx + W
+(N * x) mod m
+
+==>
+
+ax mod m = ay mod m <=>
+(N * x) mod m = (N * y) mod m
+// we can remove N by Law A and multipying by (1 / N)
+// but is (1 / N) ≡ (1 / N) (mod m) - obviously
+
+==>
+
+x ≡ y (mod m)
+// done
+```

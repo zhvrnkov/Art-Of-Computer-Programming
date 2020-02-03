@@ -551,3 +551,48 @@ ax mod m = ay mod m <=>
 x ≡ y (mod m)
 // done
 ```
+
+### Litle Fermat's Theorem 
+if p is **prime**, then a^p ≡ a (mod p) for any a (:: Int)
+
+##### Proof of Litle Fermat's Theorem
+1. a is multiple of p \
+if `k * a = p` ==> obviously `a^p ≡ a`
+
+2. a is not multiple of p \
+> p is prime ==> p is divisible by p and 1 ==> gcd p a == 1
+> if gcd p a = N, and N /= 1 and N /= p, then p mod N = 0, but p mod N = 0 only for N = 1 and N = p
+
+Consider the set A:
+0 mod p, a mod p, 2a mod p, .., (p - 1) * a mod p
+
+2.1 Proof that for any y, `y(n * p + x) mod p /= 0`, y < p, y > 0, `(n * p + x) mod p /= 0`. \
+Well if `(n * p + x) mod p /= 0` and y > 0 then it is obvious
+
+> `(n * p + x) mod p` is a (since gcd p a /= 0)  ==> in set A all, except first member, are not zero
+
+2.2 Proof that A is set (no duplicates) \
+Consider that `k /= n; k < p; n < p; k > 0; n > 0` \
+`k * a mod p = n * a mod p`. In other words consider that A got duplicates
+==> (k, n :: Int), which means that ka - na = X * p
+==> (ka - na) mod p = 0
+==> (k - n)a mod p = 0, but k - n < p
+==> (k - n)a mod p /= 0
+
+> N * a mod p = 0 can satisfy only if N mod p = 0 because gcd a p = 1
+> in our case N = k - n and N < p which means that A is set
+
+2.3 Proof that set A define set [0..<p] \
+Set A gives as p distinct and unique numbers, each of them is bigger or equal than zero and less then p which means that A produce [0..<p].
+
+> length [0..<p] == p, all bigger or equal than 0, all unique
+> A can produce [0..<p] in any order, but we will consider that it producing it in low->high order
+
+Consider that a mod p = 1 mod p and 2a mod p = 2 mod p, then by Law A \
+(2a * a) mod p = (1 * 2) mod p \
+==> a * 2a * ... * (p - 1)a ≡ 1 * 2 * ... * (p - 1)
+==> multiply it by a
+==> a^p(1 * 2 * ... * (p - 1)) ≡ a(1 * 2 * ... * (p - 1)) (mod p)
+==> and since any of [1..<p] is relatively prime to p, then any of them can be canceled by Law B and we got `a^p ≡ a (mod p)`
+
+// done

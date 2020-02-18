@@ -10,6 +10,29 @@ count (Permutation objects k)
   | otherwise = (* n) . count $ Permutation (tail objects) (k - 1)
   where n = length objects
 
+perm :: Eq a => [a] -> [[a]]
+perm [] = [[]]
+perm xs = do x <- xs
+             let ls = delete x xs
+             l <- perm ls
+             return $ x : ls
+
+{--
+[1, 2]
+x = 1
+ls = 2
+  x = 2
+  ls = []
+  l = []
+  [2]
+l = 2
+[1, 2]
+---
+x = 2
+ls = 1
+[2, 1]
+--}
+
 allcombinations :: Int -> [[Int]]
 allcombinations 0 = []
 allcombinations n = _allcombinations n [[1]]

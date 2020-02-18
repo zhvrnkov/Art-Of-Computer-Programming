@@ -596,3 +596,36 @@ Consider that a mod p = 1 mod p and 2a mod p = 2 mod p, then by Law A \
 ==> and since any of [1..<p] is relatively prime to p, then any of them can be canceled by Law B and we got `a^p ≡ a (mod p)`
 
 // done
+
+# 1.2.5 Permutation and Factorials
+A *permutation* of n objects is an arrangement of n distinct objects in a row
+
+Number of permutations:
+P(n, k) = n(n - 1) ... (n - k + 1)
+
+How to get P(n + 1, k + 1) if P(n, k) if known? \
+There are two principal ways to do this:
+
+1. For each *old* permutation create (n + 1) other: \
+got 2 3 1 permutation -> {4 2 3 1; 2 4 3 1; 2 3 4 1; 2 3 1 4}
+
+2. [haskell-function](./permutation-and-factorials.hs)
+
+**Q**: eq. 8 isn't fully understanded. Knuth make an attempt to explain this at 48th page, but I still don't get it. You can fint the code representation of this eq. [here](./sandbox-of-permutations-and-factorials-chapter.hs)
+
+##### Euler's generalization of factorial function
+Valid for `any Real > 0`:
+```
+n! = lim (m -> inf) ((m^n * m!) / (n + 1)(n + 2)...(n + m)
+```
+
+Also notice the gamma function -- Г
+```
+Г(x) = x!/x
+n! = Г(n + 1)
+```
+
+> there is also graph of gamma function. Fun notice, is that on graph you can see that gamma funciton has offset on x-axis -- this follows from gamma definition.
+
+> factorial powers
+
